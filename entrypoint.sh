@@ -9,6 +9,9 @@ gsutil rsync -r gs://$GCS_BUC/.local ~/.local
 mopidy &
 pid=$!
 
+snapserver &
+spid=$!
+
 syncLocalFiles() {
 gsutil rsync -r  ~/.local gs://$GCS_BUC/.local 
 exit
@@ -17,5 +20,5 @@ trap 'syncLocalFiles' SIGTERM
 trap 'syncLocalFiles' SIGINT
 trap 'syncLocalFiles' SIGTSTP
 
-wait $pid
+wait $pid $spid
 
