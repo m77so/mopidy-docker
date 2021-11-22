@@ -2,11 +2,11 @@
 
 mkdir -p ~/.config/mopidy
 mkdir -p ~/.local
-gsutil cp gs://$GCS_BUC/config/mopidy/mopidy.conf ~/mopidy.conf.template
 gsutil rsync -r gs://$GCS_BUC/.local ~/.local
 
-envsubst '$$PORT $$HOSTNAME' < /root/nginx.conf.template > /root/nginx.conf
-envsubst '$$PORT $$HOSTNAME' < /root/mopidy.conf.template > /root/.config/mopidy/mopidy.conf
+envsubst '$$PORT $$HOSTNAME' < /root/nginx.conf.template > ~/nginx.conf
+envsubst '$$PORT $$HOSTNAME' < /root/mopidy.conf.template > ~/.config/mopidy/mopidy.conf
+
 
 mopidy &
 pid=$!
@@ -25,5 +25,5 @@ trap 'syncLocalFiles' SIGTERM
 trap 'syncLocalFiles' SIGINT
 trap 'syncLocalFiles' SIGTSTP
 
-wait $pid $spid  $npid
+wait $pid $spid $npid
 

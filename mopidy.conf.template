@@ -20,7 +20,7 @@ output = audioresample ! audioconvert ! audio/x-raw,rate=48000,channels=2,format
 [http]
 hostname = ::
 port = 6680 
-allowed_origins = $HOSTNAME:$PORT
+allowed_origins = $HOSTNAME:$PORT,$HOSTNAME
 
 [spotify]
 enabled = true

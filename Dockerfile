@@ -12,6 +12,7 @@ RUN pip3 install Mopidy-Iris
 COPY snapserver.conf /etc/
 COPY entrypoint.sh /root/
 COPY nginx.conf.template /root/
+COPY mopidy.conf.template /root/
 
 
 ENTRYPOINT ["/bin/bash", "/root/entrypoint.sh"]

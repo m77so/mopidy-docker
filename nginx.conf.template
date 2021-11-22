@@ -29,14 +29,7 @@ http{
         proxy_buffers 256 16k;
         proxy_buffer_size 16k;
         
-        location /mopidy/ws {
-            proxy_pass http://127.0.0.1:6680;
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection $connection_upgrade;
-            proxy_read_timeout 604800;
-            proxy_send_timeout 604800;
-        }
+
         location ~ /(jsonrpc|stream)$ {
             proxy_pass http://127.0.0.1:1780;
             proxy_http_version 1.1;
@@ -47,7 +40,12 @@ http{
         }
     
         location / {
+            proxy_http_version 1.1;
             proxy_pass http://127.0.0.1:6680;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+            proxy_read_timeout 604800;
+            proxy_send_timeout 604800;
         }
     
     }
