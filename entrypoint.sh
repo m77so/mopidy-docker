@@ -2,9 +2,11 @@
 
 mkdir -p ~/.config/mopidy
 mkdir -p ~/.local
-gsutil rsync gs://$GCS_BUC/config/mopidy ~/.config/mopidy
-sed -i -e "s/port_number/$PORT/" ~/.config/mopidy/mopidy.conf
+gsutil cp gs://$GCS_BUC/config/mopidy/mopidy.conf ~/mopidy.conf.template
 gsutil rsync -r gs://$GCS_BUC/.local ~/.local
+
+envsubst '$$PORT $$HOSTNAME' < /root/nginx.conf.template > /root/nginx.conf
+envsubst '$$PORT $$HOSTNAME' < /root/mopidy.conf.template > /root/.config/mopidy/mopidy.conf
 
 mopidy &
 pid=$!
