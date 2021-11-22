@@ -12,6 +12,9 @@ pid=$!
 snapserver &
 spid=$!
 
+nginx -c ~/nginx.conf -g "daemon off;" &
+npid=$!
+
 syncLocalFiles() {
 gsutil rsync -r  ~/.local gs://$GCS_BUC/.local 
 exit
@@ -20,5 +23,5 @@ trap 'syncLocalFiles' SIGTERM
 trap 'syncLocalFiles' SIGINT
 trap 'syncLocalFiles' SIGTSTP
 
-wait $pid $spid
+wait $pid $spid  $npid
 
