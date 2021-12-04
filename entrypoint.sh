@@ -4,7 +4,7 @@ mkdir -p ~/.config/mopidy
 mkdir -p ~/.local
 gsutil rsync -r gs://$GCS_BUC/.local ~/.local
 
-envsubst '$$PORT $$HOSTNAME' < /root/nginx.conf.template > ~/nginx.conf
+envsubst '$$PORT $$NGINX_SERVER_NAME' < /root/nginx.conf.template > ~/nginx.conf
 envsubst '$$PORT $$HOSTNAME' < /root/mopidy.conf.template > ~/.config/mopidy/mopidy.conf
 
 

@@ -13,6 +13,7 @@ COPY snapserver.conf /etc/
 COPY entrypoint.sh /root/
 COPY nginx.conf.template /root/
 COPY mopidy.conf.template /root/
+COPY .htpasswd /etc/nginx/.htpasswd
 
 
 ENTRYPOINT ["/bin/bash", "/root/entrypoint.sh"]

@@ -13,7 +13,7 @@ http{
 
     server {
         listen $PORT;
-        server_name _;
+        server_name $NGINX_SERVER_NAME;
     
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -28,8 +28,9 @@ http{
         proxy_buffering on;
         proxy_buffers 256 16k;
         proxy_buffer_size 16k;
+        auth_basic "Basic Authentication";
+        auth_basic_user_file /etc/nginx/.htpasswd;
         
-
         location ~ /(jsonrpc|stream)$ {
             proxy_pass http://127.0.0.1:1780;
             proxy_http_version 1.1;
