@@ -25,3 +25,5 @@ allowed_origins = $HOSTNAME:$PORT,$HOSTNAME
 [spotify]
 enabled = true
 
+[local]
+media_dir = /music
