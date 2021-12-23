@@ -8,7 +8,7 @@ envsubst '$$PORT $$NGINX_SERVER_NAME' < /root/nginx.conf.template > ~/nginx.conf
 envsubst '$$PORT $$HOSTNAME' < /root/mopidy.conf.template > ~/.config/mopidy/mopidy.conf
 
 
-mopidy &
+mopidy local scan && mopidy &
 pid=$!
 
 snapserver &
